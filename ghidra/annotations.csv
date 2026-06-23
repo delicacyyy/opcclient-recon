@@ -1,0 +1,10 @@
+address,suggested_name,confidence,notes
+00404310,ConnectInitializeAndCreateDefaultGroup,high,"CoCreateInstance/Ex; AddGroup; SetName; IDataObject::DAdvise evidence"
+00404F00,AddItemsAndInitializeItemState,high,"AddItems; canonical type/access metadata; first sync read"
+00405470,EnumerateGroupItemAttributes,high,"IEnumOPCItemAttributes evidence"
+00405730,HandleItemWriteCommand,medium,"Contains both asynchronous and synchronous write error paths"
+00405B70,HandleItemReadCommand,medium,"Contains synchronous and asynchronous read error paths"
+00405FF0,RefreshGroupData,high,"Refresh and Refresh2 evidence"
+00406330,FormatOpcError,high,"GetErrorString fallback and FormatMessage evidence"
+004077F0,EnumerateOpcServers,high,"OPC 2.0 Server Browser plus remote-registry fallback"
+00407FF0,ResolveOpcServerClsid,high,"Remote/local server lookup and activation evidence"
