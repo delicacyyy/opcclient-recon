@@ -90,6 +90,9 @@ std::unique_ptr<ConnectionConfig> ConnectionConfig::Load(const std::filesystem::
             } else if (qualified == L"auth.password") {
                 config->passwordPresent_ = true;
                 config->password_.assign(value.begin(), value.end());
+                if (!config->password_.empty()) {
+                    config->password_.push_back(L'\0');
+                }
                 if (!value.empty()) {
                     SecureZeroMemory(value.data(), value.size() * sizeof(wchar_t));
                 }
@@ -142,7 +145,9 @@ COAUTHIDENTITY ConnectionConfig::Identity() const {
     identity.Password = password_.empty()
         ? nullptr
         : reinterpret_cast<USHORT*>(const_cast<wchar_t*>(password_.data()));
-    identity.PasswordLength = static_cast<ULONG>(password_.size());
+    identity.PasswordLength = password_.empty()
+        ? 0
+        : static_cast<ULONG>(password_.size() - 1);
     identity.Flags = SEC_WINNT_AUTH_IDENTITY_UNICODE;
     return identity;
 }

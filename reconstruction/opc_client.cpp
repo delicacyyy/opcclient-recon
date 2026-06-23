@@ -15,6 +15,19 @@ COAUTHINFO MakeAuthInfo(COAUTHIDENTITY* identity) {
     return auth;
 }
 
+HRESULT SetProxyBlanket(IUnknown* proxy, COAUTHIDENTITY* identity) {
+    return CoSetProxyBlanket(
+        proxy,
+        RPC_C_AUTHN_WINNT,
+        RPC_C_AUTHZ_NONE,
+        nullptr,
+        RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
+        RPC_C_IMP_LEVEL_IMPERSONATE,
+        identity,
+        EOAC_NONE
+    );
+}
+
 template <typename T>
 HRESULT RemoteCreate(
     const std::wstring& host,
@@ -69,16 +82,20 @@ HRESULT ApplyProxyBlanket(IUnknown* proxy, const ConnectionConfig* config) {
         return S_OK;
     }
     COAUTHIDENTITY identity = config->Identity();
-    return CoSetProxyBlanket(
-        proxy,
-        RPC_C_AUTHN_WINNT,
-        RPC_C_AUTHZ_NONE,
-        nullptr,
-        RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
-        RPC_C_IMP_LEVEL_IMPERSONATE,
-        &identity,
-        EOAC_NONE
-    );
+    HRESULT hr = SetProxyBlanket(proxy, &identity);
+    if (FAILED(hr)) {
+        return hr;
+    }
+
+    ComPtr<IUnknown> unknown;
+    hr = proxy->QueryInterface(IID_IUnknown, reinterpret_cast<void**>(unknown.Put()));
+    if (FAILED(hr)) {
+        return hr;
+    }
+    if (unknown.Get() != proxy) {
+        hr = SetProxyBlanket(unknown.Get(), &identity);
+    }
+    return hr;
 }
 
 ComRuntime::ComRuntime() {
