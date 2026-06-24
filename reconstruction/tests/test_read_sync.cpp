@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "live_opc_fixture.h"
 
 namespace opcclient::tests {

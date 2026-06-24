@@ -85,6 +85,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(OpcInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,18 +142,58 @@
     <ClCompile Include="opc_guids.c">
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
-    <ClCompile Include="tests\live_opc_fixture.cpp" />
-    <ClCompile Include="tests\test_browse.cpp" />
-    <ClCompile Include="tests\test_config_identity.cpp" />
-    <ClCompile Include="tests\test_discovery.cpp" />
-    <ClCompile Include="tests\test_main.cpp" />
-    <ClCompile Include="tests\test_read_async.cpp" />
-    <ClCompile Include="tests\test_read_sync.cpp" />
-    <ClCompile Include="tests\test_status.cpp" />
-    <ClCompile Include="tests\test_subscribe.cpp" />
-    <ClCompile Include="tests\test_write_async.cpp" />
-    <ClCompile Include="tests\test_write_guard.cpp" />
-    <ClCompile Include="tests\test_write_sync.cpp" />
+    <ClCompile Include="tests\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="tests\live_opc_fixture.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="tests\test_browse.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="tests\test_config_identity.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="tests\test_discovery.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="tests\test_main.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="tests\test_read_async.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="tests\test_read_sync.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="tests\test_status.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="tests\test_subscribe.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="tests\test_write_async.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="tests\test_write_guard.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="tests\test_write_sync.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cli.h" />
@@ -161,6 +202,7 @@
     <ClInclude Include="config.h" />
     <ClInclude Include="opc_client.h" />
     <ClInclude Include="tests\live_opc_fixture.h" />
+    <ClInclude Include="tests\pch.h" />
     <ClInclude Include="tests\test_harness.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
