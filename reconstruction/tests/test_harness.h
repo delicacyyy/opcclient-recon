@@ -60,7 +60,7 @@ inline void RequireSucceeded(HRESULT hr, const wchar_t* operation) {
 }
 
 void TestConfigIdentityHardcodedCredentials();
-void TestDiscoveryEnumeratesKepware();
+void TestDiscoveryEnumeratesOpcDaServers();
 void TestStatusKepwareRunning();
 void TestBrowseReturnsItems();
 void TestReadSyncReadsUi2Item();

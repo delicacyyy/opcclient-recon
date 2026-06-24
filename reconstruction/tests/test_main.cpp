@@ -7,7 +7,7 @@ namespace {
 
 const TestCase kTests[] = {
     {L"ConfigIdentity_HardcodedCredentials", TestConfigIdentityHardcodedCredentials},
-    {L"Discovery_EnumeratesKepware", TestDiscoveryEnumeratesKepware},
+    {L"Discovery_EnumeratesOpcDaServers", TestDiscoveryEnumeratesOpcDaServers},
     {L"Status_KepwareRunning", TestStatusKepwareRunning},
     {L"Browse_ReturnsItems", TestBrowseReturnsItems},
     {L"ReadSync_ReadsUi2Item", TestReadSyncReadsUi2Item},
