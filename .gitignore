@@ -1,11 +1,12 @@
 # Never commit plaintext authentication files.
 *.ini
-!*.ini.example
+*.ini.example
 
 # Build / IDE / generated outputs (regenerate by running the scripts)
-reconstruction/.vs/
+**/.vs/
 reconstruction/obj/
 reconstruction/bin/
-reconstruction/opcclient-recon.vcxproj.user
+reconstruction/*.user
 ghidra/project/
 artifacts/
+CppProperties.json

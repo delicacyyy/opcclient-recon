@@ -130,6 +130,34 @@ std::unique_ptr<ConnectionConfig> ConnectionConfig::Load(const std::filesystem::
     return config;
 }
 
+std::unique_ptr<ConnectionConfig> ConnectionConfig::FromValues(
+    std::wstring host,
+    std::wstring domain,
+    std::wstring username,
+    std::wstring password
+) {
+    if (host.empty()) {
+        throw std::runtime_error("Configuration is missing server.ip");
+    }
+    if (username.empty()) {
+        throw std::runtime_error("Configuration is missing auth.username");
+    }
+
+    auto config = std::unique_ptr<ConnectionConfig>(new ConnectionConfig());
+    config->host_ = std::move(host);
+    config->domain_ = std::move(domain);
+    config->username_ = std::move(username);
+    config->passwordPresent_ = true;
+    config->password_.assign(password.begin(), password.end());
+    if (!config->password_.empty()) {
+        config->password_.push_back(L'\0');
+    }
+    if (!password.empty()) {
+        SecureZeroMemory(password.data(), password.size() * sizeof(wchar_t));
+    }
+    return config;
+}
+
 const std::wstring& ConnectionConfig::Host() const {
     return host_;
 }

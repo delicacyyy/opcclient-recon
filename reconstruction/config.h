@@ -14,6 +14,12 @@ public:
     ~ConnectionConfig();
 
     static std::unique_ptr<ConnectionConfig> Load(const std::filesystem::path& path);
+    static std::unique_ptr<ConnectionConfig> FromValues(
+        std::wstring host,
+        std::wstring domain,
+        std::wstring username,
+        std::wstring password
+    );
 
     const std::wstring& Host() const;
     COAUTHIDENTITY Identity() const;
